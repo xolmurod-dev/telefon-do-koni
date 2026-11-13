@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="phoneBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="50%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded rectangle -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <rect x="8" y="8" width="496" height="496" rx="120" stroke="#334155" stroke-width="4" stroke-opacity="0.4"/>
+
+  <!-- Phone Body -->
+  <rect x="156" y="84" width="200" height="344" rx="42" fill="url(#screenGrad)" stroke="url(#phoneBorder)" stroke-width="16"/>
+
+  <!-- Dynamic Island / Top Notch -->
+  <rect x="220" y="112" width="72" height="14" rx="7" fill="#10b981"/>
+
+  <!-- Stylized Smartphone Display Elements -->
+  <circle cx="256" cy="240" r="38" fill="#10b981" fill-opacity="0.15" stroke="#34d399" stroke-width="6"/>
+  <path d="M256 220v40M236 240h40" stroke="#34d399" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Connection Waves -->
+  <path d="M216 196a60 60 0 0 1 80 0" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-opacity="0.8"/>
+  <path d="M196 176a90 90 0 0 1 120 0" stroke="#10b981" stroke-width="5" stroke-linecap="round" stroke-opacity="0.4"/>
+
+  <!-- Home Indicator bar -->
+  <rect x="216" y="394" width="80" height="8" rx="4" fill="#34d399" fill-opacity="0.9"/>
+</svg>
