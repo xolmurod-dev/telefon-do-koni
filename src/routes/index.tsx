@@ -61,7 +61,7 @@ const heroImages = [
 const heroSlides = [...heroImages, heroImages[0]];
 
 function Home() {
-  const { user, isAdmin } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
 
@@ -76,14 +76,6 @@ function Home() {
       ? serverProducts
       : getAllProducts().filter((p) => p.category === "phone");
 
-  const requireAuth = (actionName: string, onAuthorized: () => void) => {
-    if (!user) {
-      openAuthModal("register", `${actionName} uchun avval ro'yxatdan o'ting!`);
-      return;
-    }
-    onAuthorized();
-  };
-
   return (
     <div className="px-4 pt-4">
       {/* Top Header */}
@@ -95,13 +87,6 @@ function Home() {
           <h1 className="text-2xl font-extrabold tracking-tight">PhoneHub</h1>
         </div>
         <div className="flex items-center gap-2">
-          <Link
-            to="/admin"
-            className="flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary transition"
-            title="Admin boshqaruv paneli"
-          >
-            <span>⚙️ Admin</span>
-          </Link>
           {!user ? (
             <button
               onClick={() => openAuthModal("register", "Ilovadan to'liq foydalanish uchun ro'yxatdan o'ting")}

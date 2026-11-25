@@ -13,6 +13,7 @@ import { useRouterState } from "@tanstack/react-router";
 import { BottomNav } from "@/components/shop/BottomNav";
 import { AuthModal } from "@/components/shop/AuthModal";
 import { Toaster } from "@/components/ui/sonner";
+import { useAuth, openAuthModal } from "@/lib/auth";
 
 import appCss from "../styles.css?url";
 
@@ -134,9 +135,46 @@ function RootComponent() {
 function Shell() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isAdmin = path.startsWith("/admin");
+  const { isAuthenticated } = useAuth();
+
   if (isAdmin) return <Outlet />;
+
+  const handleInterceptClick = (e: React.MouseEvent) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      e.stopPropagation();
+      openAuthModal("register", "Ilovadan to'liq foydalanish uchun avval ro'yxatdan o'ting!");
+    }
+  };
+
+  const handleInterceptKeyDown = (e: React.KeyboardEvent) => {
+    if (!isAuthenticated && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      e.stopPropagation();
+      openAuthModal("register", "Ilovadan to'liq foydalanish uchun avval ro'yxatdan o'ting!");
+    }
+  };
+
   return (
-    <div className="mx-auto min-h-screen max-w-lg pb-28">
+    <div
+      onClickCapture={handleInterceptClick}
+      onKeyDownCapture={handleInterceptKeyDown}
+      className="mx-auto min-h-screen max-w-lg pb-28"
+    >
+      {!isAuthenticated && (
+        <div className="sticky top-0 z-50 flex items-center justify-between border-b border-primary/20 bg-primary/10 px-4 py-2 backdrop-blur-md">
+          <p className="text-[11px] font-semibold text-foreground">
+            🔒 Saytdan to'liq foydalanish uchun ro'yxatdan o'ting
+          </p>
+          <button
+            type="button"
+            onClick={() => openAuthModal("register", "Ilovadan foydalanish uchun ro'yxatdan o'ting")}
+            className="rounded-xl bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-xs hover:opacity-90 active:scale-95"
+          >
+            Ro'yxatdan o'tish
+          </button>
+        </div>
+      )}
       <Outlet />
       <BottomNav />
     </div>
